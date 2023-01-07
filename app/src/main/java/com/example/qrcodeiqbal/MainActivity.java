@@ -17,7 +17,7 @@ import com.google.zxing.integration.android.IntentResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class    MainActivity extends AppCompatActivity implements View.OnClickListener{
     //view object
     private Button buttonScanning;
     private TextView textViewName,textViewClass,textViewId;
@@ -77,7 +77,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Toast.LENGTH_LONG).show();
                 }
             }
-        }else {
+        }{try {
+            String geoUri=result.getContents();
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUri));
+            //set package
+            intent.setPackage("com.google.android.apps.maps");
+            //set Flags
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }finally {
+
+        }
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
